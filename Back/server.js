@@ -8,6 +8,7 @@ const socket = require('socket.io');
 const app = express();
 const server = Server(app);
 const PORT = 3001;
+const data = require('./data');
 
 // == Express
 app.use(bodyParser.json());
@@ -32,6 +33,22 @@ app.get('/', (req, res) => {
       </ul>
     </div>
   `);
+});
+
+app.get('/messages', (req, res) => {
+  console.log('>> GET /messages');
+
+  // get messages in DB
+  const messages = data.messages;
+
+  // http response
+  if (messages) {
+    console.log(`<< 200 OK - ${messages.length} messages sent`);
+    res.json({messages});
+  } else {
+    console.log('<< 404 NOT FOUND');
+    res.status(404).end();
+  }
 });
 
 // == Server
