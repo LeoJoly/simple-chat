@@ -29,10 +29,33 @@ app.get('/', (req, res) => {
       <p style="line-height: .3rem">You can start using the API ;-)</p>
       <ul style="display: inline-block; margin-top: .3rem">
         <li><code>GET http://localhost:${PORT}/messages</code></li>
-        <li><code>POST http://localhost:${PORT}/messages</code></li>
+        <li><code>POST http://localhost:${PORT}/login</code></li>
       </ul>
     </div>
   `);
+});
+
+let userId = 2;
+app.post('/login', (req, res) => {
+  console.log('>> POST /login', req.body);
+
+  // extracting request data from the body
+  const { username } = req.body;
+
+  if (username) {
+    // create new user
+    const newUser = {
+      id: ++userId,
+      username,
+    };
+    // push new user in DB
+    data.users.push(newUser);
+    // send user's data
+    res.json({user: newUser});
+  } else {
+    console.log('<< 401 UNAUTHORIZED');
+    response.status(401).end();
+  }
 });
 
 app.get('/messages', (req, res) => {
