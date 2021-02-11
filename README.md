@@ -1,2 +1,3 @@
-# simple-chat
+# SIMPLE CHAT
+
 Simple Chat is a message application made with React.js, Node.js, Express and Socket.io
