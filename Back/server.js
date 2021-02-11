@@ -21,7 +21,16 @@ app.use((request, response, next) => {
 // Routes
 app.get('/', (req, res) => {
   res.send(`
-    <div>Hello ! I'm the server...</div>
+    <div style="margin: 6rem auto; width: 400px; line-height: 1.5rem">
+      <h1 style="text-align: center">Hello !</h1>
+      <h2 style="text-align: center">And welcome to Simple Chat (server)</h2>
+      <p style="line-height: .3rem">If you see this message, it means that the server is started</p>
+      <p style="line-height: .3rem">You can start using the API ;-)</p>
+      <ul style="display: inline-block; margin-top: .3rem">
+        <li><code>GET http://localhost:${PORT}/messages</code></li>
+        <li><code>POST http://localhost:${PORT}/messages</code></li>
+      </ul>
+    </div>
   `);
 });
 
