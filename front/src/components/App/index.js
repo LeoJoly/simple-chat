@@ -1,11 +1,21 @@
+// == Package imports
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
+
+// == Local import
+// components
+import Login from '../../pages/Login';
 
 const App = () => {
   return (
     <div className='app'>
+
       <Route exact path="/">
-        <p>Hi! I'm your beautiful app.</p>
+        <Redirect to='login' />
+      </Route>
+
+      <Route exact path="/login">
+        <Login />
       </Route>
     </div>
   );

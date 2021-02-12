@@ -5,7 +5,8 @@ import { BrowserRouter } from 'react-router-dom';
 
 // == Local imports
 // styles
-import './styles/index.css';
+import './styles/reset.scss';
+import './styles/index.scss';
 // components
 import App from './components/App';
 
