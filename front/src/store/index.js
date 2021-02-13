@@ -1,16 +1,19 @@
 // == Imports
 // packages
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 // reducer
 import reducer from './reducer';
 // MW
+import apiMiddleware from './middlewares/api';
 
 // store creation
 const store = createStore(
   reducer,
-  composeWithDevTools(),
+  composeWithDevTools(
+    applyMiddleware(apiMiddleware),
+  ),
 );
 
 export default store;

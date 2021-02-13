@@ -1,4 +1,4 @@
-import { CHANGE_FIELD } from './action';
+import { CHANGE_FIELD, LOGIN_SUCCESS } from './action';
 
 const initialState = {
   username: '',
@@ -15,6 +15,13 @@ const reducer = (oldState = initialState, action) => {
         [action.name]: action.value,
       };
 
+    case LOGIN_SUCCESS:
+      return {
+        ...oldState,
+        username: action.username,
+        isLogged: true,
+      };
+      
     default:
       return {
         ...oldState,

@@ -7,9 +7,16 @@ import { withRouter } from 'react-router-dom';
 // action
 import { changeField } from '../../store/action';
 
-const Login = ({ username, trackUsername }) => {
+const Login = ({ handleLogin, username, trackUsername }) => {
+  // tracking login field
   const onChange = (event) => {
     trackUsername(event.target.name, event.target.value);
+  };
+
+  // submit action
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    handleLogin();
   };
 
   return (
@@ -20,8 +27,9 @@ const Login = ({ username, trackUsername }) => {
         </section>
         <section className="login__container__connect">
           <p className="login__container__connect__text">Choose a funny username to join the chat.</p>
-          <form className="login__container__connect__form">
+          <form className="login__container__connect__form" onSubmit={handleSubmit}>
             <input
+              autoComplete="off"
               className="login__container__connect__form__input"
               type="text"
               name="username"
@@ -44,7 +52,11 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   trackUsername: (name, value) => {
     dispatch(changeField(name, value));
-  }
+  },
+
+  handleLogin: () => {
+    dispatch({type: 'LOGIN'});
+  },
 });
 
 let container = withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));
