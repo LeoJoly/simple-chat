@@ -1,24 +1,37 @@
 // == Package imports
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Route, Redirect, withRouter } from 'react-router-dom';
 
 // == Local import
 // components
 import Login from '../../pages/Login';
+import Chat from '../../pages/Chat';
 
-const App = () => {
+const App = ({ isLogged }) => {
   return (
     <div className='app'>
 
       <Route exact path="/">
-        <Redirect to='login' />
+        {!isLogged && <Redirect to='/login' />}
+        {isLogged && <Redirect to='/chat' />}
       </Route>
 
       <Route exact path="/login">
         <Login />
       </Route>
+
+      <Route exact path="/chat">
+        <Chat />
+      </Route>
     </div>
   );
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  isLogged: state.isLogged,
+});
+
+const container = withRouter(connect(mapStateToProps, null)(App));
+
+export default container;

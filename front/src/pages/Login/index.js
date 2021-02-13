@@ -1,13 +1,13 @@
-// Package imports
+// == Package imports
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 
 // == Local imports
 // action
 import { changeField } from '../../store/action';
 
-const Login = ({ handleLogin, username, trackUsername }) => {
+const Login = ({ handleLogin, isLogged, username, trackUsername }) => {
   // tracking login field
   const onChange = (event) => {
     trackUsername(event.target.name, event.target.value);
@@ -21,6 +21,10 @@ const Login = ({ handleLogin, username, trackUsername }) => {
 
   return (
     <main className="login">
+
+      {/* Redirect when user is logged */}
+      {isLogged && <Redirect to='/chat' />}
+      
       <div className="login__container">
         <section className="login__container__text">
           Welcome to Simple Chat !
@@ -46,6 +50,7 @@ const Login = ({ handleLogin, username, trackUsername }) => {
 };
 
 const mapStateToProps = (state) => ({
+  isLogged: state.isLogged,
   username: state.username,
 });
 
