@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // == Local imports
 //actions
-import { getMessageSuccess, loginSuccess } from '../action';
+import { connectWebSocket, getMessageSuccess, loginSuccess } from '../action';
 
 // API url
 const apiUrl = 'http://localhost:3001';
@@ -37,6 +37,7 @@ const apiMiddleware = store => next => action => {
                   throw response.error;
                 } else {
                   store.dispatch(getMessageSuccess(response.data));
+                  store.dispatch(connectWebSocket());
                 }
               })
           }

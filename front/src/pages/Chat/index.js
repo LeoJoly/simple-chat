@@ -10,15 +10,20 @@ import Message from './Message'
 // hooks
 import useAutoScroll from '../../hooks/useAutoScroll';
 // action
-import { changeField } from '../../store/action';
+import { changeField, resetField } from '../../store/action';
 
-const Chat = ({ isLogged, messages, newMessage, trackNewMessage, username }) => {
+const Chat = ({ handleNewMessage, isLogged, messages, newMessage, trackNewMessage, username }) => {
   // custom hook to scroll automatically to the bottom
   const bottom = useAutoScroll([messages]);
 
   const handleChange = (event) => {
     trackNewMessage(event.target.name, event.target.value);
   };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    handleNewMessage();
+  }
 
   return (
     <main className="chat">
@@ -37,8 +42,9 @@ const Chat = ({ isLogged, messages, newMessage, trackNewMessage, username }) => 
             })}
             <div className="chat__container__app__window__bottom" ref={bottom} />
           </div>
-          <form className="chat__container__app__form">
-            <textarea
+          <form className="chat__container__app__form" onSubmit={handleSubmit}>
+            <input
+              type="text"
               name="newMessage"
               value={newMessage}
               onChange={handleChange}
@@ -61,9 +67,14 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  handleNewMessage: () => {
+    dispatch({type: 'EMIT_MESSAGE'});
+    dispatch(resetField());
+  },
+
   trackNewMessage: (name, value) => {
-    dispatch(changeField(name, value))
-  }
+    dispatch(changeField(name, value));
+  },
 })
 
 const container = withRouter(connect(mapStateToProps, mapDispatchToProps)(Chat));
