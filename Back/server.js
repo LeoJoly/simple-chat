@@ -7,8 +7,9 @@ const socket = require('socket.io');
 // Variables
 const app = express();
 const server = Server(app);
-const PORT = 3001;
+const io = socket(server);
 const data = require('./data');
+const PORT = 3001;
 
 // == Express
 app.use(bodyParser.json());
@@ -72,6 +73,21 @@ app.get('/messages', (req, res) => {
     console.log('<< 404 NOT FOUND');
     res.status(404).end();
   }
+});
+
+// == Socket.io
+let msgId = 9;
+io.on('connection', (ws) => {
+  console.log('>> socket.io - connected');
+
+  ws.on('send_message', (message) => {
+    console.log(`>> msg recieved: ${message}`);
+    message.id = ++msgId;
+    // saving message in DB
+    data.messages.push(message);
+    // broadcast to other users
+    io.emit('send_message', message);
+  });
 });
 
 // == Server
