@@ -24,11 +24,11 @@ const Login = ({ handleLogin, isLogged, username, trackUsername }) => {
 
       {/* Redirect when user is logged */}
       {isLogged && <Redirect to='/chat' />}
-      
+
       <div className="login__container">
-        <section className="login__container__text">
+        <div className="login__container__text">
           Welcome to Simple Chat !
-        </section>
+        </div>
         <section className="login__container__connect">
           <p className="login__container__connect__text">Choose a funny username to join the chat.</p>
           <form className="login__container__connect__form" onSubmit={handleSubmit}>
