@@ -1,4 +1,4 @@
-import { CHANGE_FIELD, LOGIN_SUCCESS } from './action';
+import { CHANGE_FIELD, GET_MESSAGES_SUCCESS, LOGIN_SUCCESS, RECEIVE_MESSAGE, RESET_FIELD } from './action';
 
 const initialState = {
   username: '',
@@ -20,6 +20,31 @@ const reducer = (oldState = initialState, action) => {
         ...oldState,
         username: action.username,
         isLogged: true,
+      };
+      
+    case GET_MESSAGES_SUCCESS:
+      return {
+        ...oldState,
+        messages: action.messages,
+      };
+
+    case RECEIVE_MESSAGE:
+      return {
+        ...oldState,
+        messages: [
+          ...oldState.messages,
+          {
+            id: action.message.id,
+            author: action.message.author,
+            content: action.message.content,
+          }
+        ]
+      };
+
+    case RESET_FIELD:
+      return {
+        ...oldState,
+        newMessage: '',
       };
       
     default:

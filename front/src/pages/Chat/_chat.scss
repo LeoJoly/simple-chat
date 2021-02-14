@@ -1,0 +1,131 @@
+.chat {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__container {
+    width: 80vw;
+    max-width: 1280px;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-items: center;
+
+    &__title {
+      // max-width: 520px;
+      font-family: 'Permanent Marker', cursive;
+      font-size: 5rem;
+      transform: rotate(-11deg) translate(-120px, -10px);
+    }
+
+    &__app {
+      height: 75vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      background-color: $color-dark;
+      padding: 2rem;
+      border-radius: 30px;
+
+      &__window {
+        width: 100%;
+        height: 85%;
+        padding: 1rem 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        overflow-x: scroll;
+
+        &__bottom {
+          width: 100%;
+          height: 0;
+        }
+      }
+
+      &__form {
+        width: 100%;
+        height: 14%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &__input {
+          height: 100%;
+          width: 85%;
+          margin-right: .3rem;
+          padding: 1rem;
+          border: none;
+          border-top-left-radius: 20px;
+          border-bottom-left-radius: 20px;
+          font-family: 'Work Sans', sans-serif;
+          font-weight: 300;
+          font-size: 1rem;
+          color: $color;
+
+          &::placeholder {
+            color: $color-bright;
+          }
+        }
+
+        &__btn {
+          height: 100%;
+          width: 15%;
+          border: none;
+          border-top-right-radius: 20px;
+          border-bottom-right-radius: 20px;
+          background-color: $color-bright;
+          color: $color-dark;
+          font-size: 2rem;
+          transition: .3s ease-in-out;
+
+          &:hover {
+            background-color: $color-brighter;
+          }
+        }
+      }
+    }
+  }
+}
+
+.message {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+
+  &--sent {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__container {
+    padding: 1rem;
+    margin: 1rem 0;
+    max-width: 70%;
+    background-color: $color-bright;
+    border-radius: 20px;
+    border-top-left-radius: 3px;
+
+    &--sent {
+      padding: 1rem;
+      margin: 1rem 0;
+      max-width: 70%;
+      border: solid 2px $color-bright;
+      border-radius: 20px;
+      border-bottom-right-radius: 3px;
+      color: $color-bright;
+    }
+
+    &__user {
+      font-size: 1.2rem;
+      margin-bottom: .5rem;
+    }
+
+    &__content {
+      line-height: 1.4rem;
+    }
+  }
+}
