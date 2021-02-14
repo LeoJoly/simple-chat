@@ -1,5 +1,14 @@
 const data = {
-  test: 2,
+  users: [
+    {
+      id: 1,
+      username: 'Vincent'
+    },
+    {
+      id: 2,
+      username: 'Jules'
+    }
+  ],
   messages: [
     {
       id: 1,
