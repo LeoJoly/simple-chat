@@ -5,11 +5,20 @@ import { Redirect, withRouter } from 'react-router-dom';
 import { IoIosRocket } from "react-icons/io";
 
 // == Local imports
+// components
 import Message from './Message'
+// hooks
 import useAutoScroll from '../../hooks/useAutoScroll';
+// action
+import { changeField } from '../../store/action';
 
-const Chat = ({ isLogged, messages, username }) => {
+const Chat = ({ isLogged, messages, newMessage, trackNewMessage, username }) => {
+  // custom hook to scroll automatically to the bottom
   const bottom = useAutoScroll([messages]);
+
+  const handleChange = (event) => {
+    trackNewMessage(event.target.name, event.target.value);
+  };
 
   return (
     <main className="chat">
@@ -30,6 +39,9 @@ const Chat = ({ isLogged, messages, username }) => {
           </div>
           <form className="chat__container__app__form">
             <textarea
+              name="newMessage"
+              value={newMessage}
+              onChange={handleChange}
               autoComplete="off"
               className="chat__container__app__form__input"
               placeholder="What do you have to say ?"
@@ -48,6 +60,12 @@ const mapStateToProps = (state) => ({
   username: state.username,
 });
 
-const container = withRouter(connect(mapStateToProps, null)(Chat));
+const mapDispatchToProps = (dispatch) => ({
+  trackNewMessage: (name, value) => {
+    dispatch(changeField(name, value))
+  }
+})
+
+const container = withRouter(connect(mapStateToProps, mapDispatchToProps)(Chat));
 
 export default container;
