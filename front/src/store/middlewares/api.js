@@ -4,9 +4,8 @@ import axios from 'axios';
 // == Local imports
 //actions
 import { connectWebSocket, getMessageSuccess, loginSuccess } from '../action';
-
 // API url
-const apiUrl = 'http://localhost:3001';
+import apiUrl from './apiUrl';
 
 const apiMiddleware = store => next => action => {
   const state = store.getState();

@@ -5,6 +5,8 @@ import io from 'socket.io-client';
 // actions
 import { CONNECT_WEB_SOCKET } from '../action';
 import { receiveMessage } from '../action';
+// API url
+import apiUrl from './apiUrl';
 
 let socket = null;
 
@@ -14,7 +16,7 @@ const socketMiddleware = store => next => action => {
     case CONNECT_WEB_SOCKET: {
       if (!socket) {
         // socket connection
-        socket = io('http://localhost:3001', {transports: ['websocket', 'polling', 'flashsocket']});
+        socket = io(apiUrl, {transports: ['websocket', 'polling', 'flashsocket']});
 
         // socket subscription
         socket.on('send_message', (msg) => {
